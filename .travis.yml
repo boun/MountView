@@ -3,4 +3,15 @@ os: osx
 osx_image: xcode9.2
 xcode_project: MountView.xcodeproj
 xcode_scheme: MountView
-script: xcodebuild clean && xcodebuild build -project MountView.xcodeproj -scheme MountView
+script: xcodebuild clean && xcodebuild build -project MountView.xcodeproj -scheme MountView -configuration Release -derivedDataPath build
+before_deploy:
+  cd "$TRAVIS_BUILD_DIR/build/Build/Products/Release/" && pwd && ls && zip -r MountView.app.zip MountView.app
+deploy:
+  provider: releases
+  api_key:
+    secure: "ko7L2dsrbobjB35Qgjcnw6m6ZIVHIZCnSIsIJ5/62s1UrZVZCMPPztkXzx6x6S8Q3DS/TTlsYHquSbrDduxvRoYmWAVU4n6MDEI8j2hUDD6O0C5X0+iKksugllVLRkWOfhY9OVi0H8096x62PJXaHGxQB5OUIionHR4fYkOddtEzjk+D+B+yLcIOE7SwC5mZFiM3FPxkeON4HENmzF5DYytaIGWujnukZTNLudEf7JuEUd8X8pLHxDTu08vo817wueqCfkXC/7cH9fFCqTPxrII7gJVbD7y2UPnnEYATmTPis0yUNJTQFynPykdtTZDShE0LVrRe5KJ0KBesykaGe5CdthfXat1L3N0Yil5G4FfZLk1dFJ8TlmljgZX90Pg3wQO5bU1KNaszhNQWaf/Iu7Hf4Dxrtz6CbVRgKfONPgCJ9i0pIFEbAGM4ovdqZeOGAHPNTPs6SKVvdb31gDjgI9KEN2WCiI2yw8fT9vff4BtMWh9gqhy+HQ3Hdob4vN5Rs0R7XwWBqFOqUW+HHroL3mPOB4WBoiQTVxpwAkNPsoynae9S/yJYSveJtYSRgnS1RapzgPBPtOFoc7IeLfEQW4y8GZrRZwqj/Pp2mukrGp9FWeFGfRBaDjj6IC2G7CH9a6J9yw2V94wn/V8JrCHCx4BtLf9P2/3zDbz/oDuQy3E="
+  file_glob: true
+  file: "$TRAVIS_BUILD_DIR/build/Build/Products/Release/MountView.app.zip"
+  skip_cleanup: true
+  on:
+    tags: true
