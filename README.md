@@ -1,5 +1,7 @@
 # MountView
 
+[![Build Status](https://travis-ci.org/boun/MountView.svg?branch=master)](https://travis-ci.org/boun/MountView)
+
 A simple MenuBar application, that helps you keeping track of your favorite remote folders..
 It does so by presenting a combined view of
 
@@ -9,7 +11,7 @@ It does so by presenting a combined view of
 You can love / unlove these folders and eject them, if they are mounted.
 
 <p align="center">
-  <img src="./docs/screenshot.png" alt="Size Limit example">
+  <img src="./docs/screenshot.png" alt="Cool example">
 </p>
 
 ## Usage
